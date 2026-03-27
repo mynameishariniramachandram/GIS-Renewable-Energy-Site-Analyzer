@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>AI Renewable Energy Intelligence System</title>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Segoe UI;
+background:#eef2f7;
+}
+
+.header{
+background:#FF9933;
+color:white;
+padding:15px;
+display:flex;
+align-items:center;
+}
+
+.logo{
+width:60px;
+margin-right:15px;
+}
+
+.navbar{
+background:white;
+padding:10px;
+border-bottom:4px solid #138808;
+font-weight:bold;
+}
+
+.container{
+display:grid;
+grid-template-columns:70% 30%;
+height:600px;
+}
+
+#map{
+height:100%;
+}
+
+.panel{
+background:white;
+padding:15px;
+overflow:auto;
+}
+
+.controls{
+text-align:center;
+margin:10px;
+}
+
+button{
+padding:10px 15px;
+background:#138808;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+input{
+padding:8px;
+}
+
+.chart{
+width:100%;
+height:200px;
+}
+
+.footer{
+background:#138808;
+color:white;
+text-align:center;
+padding:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+<img class="logo"
+src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
+
+<h2>Government Renewable Energy Intelligence Dashboard</h2>
+
+</div>
+
+<div class="navbar">
+AI Solar Prediction • Satellite GIS • Wind Planning
+</div>
+
+<div class="controls">
+
+<input id="city" placeholder="Search City">
+
+<button onclick="searchCity()">Search</button>
+
+</div>
+
+<div class="container">
+
+<div id="map"></div>
+
+<div class="panel">
+
+<h3>Energy Analysis</h3>
+
+<p id="solar"></p>
+<p id="wind"></p>
+<p id="energy"></p>
+<p id="houses"></p>
+
+<h3>Energy Forecast</h3>
+
+<canvas id="forecastChart" class="chart"></canvas>
+
+</div>
+
+</div>
+
+<div class="footer">
+Renewable Energy Intelligence System | AI + Satellite + GIS
+</div>
+
+<script>
+
+/* MAP */
+
+var map=L.map('map').setView([22.59,78.96],5)
+
+var satellite=L.tileLayer(
+'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+).addTo(map)
+
+
+/* CITY SEARCH */
+
+function searchCity(){
+
+let city=document.getElementById("city").value
+
+fetch("https://nominatim.openstreetmap.org/search?format=json&q="+city)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let lat=data[0].lat
+let lon=data[0].lon
+
+map.setView([lat,lon],10)
+
+L.marker([lat,lon]).addTo(map)
+
+analyzeLocation(lat,lon)
+loadForecast(lat,lon)
+
+})
+
+}
+
+
+/* DJANGO AI ANALYSIS */
+
+function analyzeLocation(lat,lon){
+
+fetch(`/analyze/?lat=${lat}&lon=${lon}`)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+document.getElementById("solar").innerHTML=
+"Solar Radiation: "+data.solar
+
+document.getElementById("wind").innerHTML=
+"Wind Speed: "+data.wind
+
+document.getElementById("energy").innerHTML=
+"Predicted Energy: "+data.energy+" kWh"
+
+document.getElementById("houses").innerHTML=
+"Houses Powered: "+(data.energy/6).toFixed(1)
+
+})
+
+}
+
+
+/* FORECAST CHART */
+
+function loadForecast(lat,lon){
+
+fetch(`/forecast/?lat=${lat}&lon=${lon}`)
+
+.then(res=>res.json())
+
+.then(data=>{
+
+let labels=[]
+let values=[]
+
+data.forEach(d=>{
+
+labels.push(d.date)
+values.push(d.energy)
+
+})
+
+new Chart(
+document.getElementById("forecastChart"),
+{
+type:"line",
+
+data:{
+labels:labels,
+
+datasets:[{
+label:"7 Day Energy Forecast",
+data:values
+}]
+}
+
+})
+
+})
+
+}
+
+</script>
+
+</body>
+</html>

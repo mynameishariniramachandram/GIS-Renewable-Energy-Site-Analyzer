@@ -1,39 +1,64 @@
-Powering Villages, Empowering Lives – Smart Energy Planning Using AI & Satellite Data
-#This predicts renewable energy potential for villages in India using:
-#Satellite Data
-#AI Solar Prediction
-#Weather Forecasts
-It plans energy usage, storage, and distribution, helping reduce fossil fuel dependence and promoting sustainable electricity.
-“Every house gets solar power, every village gets a wind turbine, and energy is used smartly according to production and storage.”
 
-| Feature                    | Description                               
-| -------------------------- | ------------------------------------------ 
-| Satellite & Weather Data   | NASA POWER API + Open-Meteo API            
-| AI Solar Prediction        | 7-day solar energy forecast                
-| Wind Energy Prediction     | Wind turbine output calculation           
-| Energy Planning & Storage  | Battery management & demand vs. supply     
-| Smart Recommendations      | EV charging, solar cookers, stove planning 
-| Government-Style Dashboard | Interactive map & charts                   
+# 🌞 Powering Villages, Empowering Lives
 
- Example Workflow
+**Smart Energy Planning Using AI & Satellite Data**
 
-1. Enter village coordinates→ fetch satellite & weather data
-2. Calculate solar & wind energy
-3. AI predicts 7-day energy output
-4. Compute village electricity demand & storage requirements
-5. Generate energy usage plan for houses, EVs, and cooking
+Predict renewable energy potential for villages in India using:
+`#SatelliteData #AISolarPrediction #WeatherForecasts`
 
- Energy Calculations
+> “Every house gets solar power, every village gets a wind turbine, and energy is used smartly according to production and storage.”
+
+---
+
+## ⚡ Features
+
+| Feature                            | Description                                |
+| ---------------------------------- | ------------------------------------------ |
+| ☁️ **Satellite & Weather Data**    | NASA POWER API + Open-Meteo API            |
+| 🤖 **AI Solar Prediction**         | 7-day solar energy forecast using ML       |
+| 🌬️ **Wind Energy Prediction**     | Wind turbine output calculation            |
+| 🔋 **Energy Planning & Storage**   | Battery management & demand vs. supply     |
+| 🔌 **Smart Recommendations**       | EV charging, solar cookers, stove planning |
+| 🏛️ **Government-Style Dashboard** | Interactive map & charts for policymakers  |
+
+---
+
+## 🛠️ Tech Stack
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge\&logo=python\&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge\&logo=django\&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge\&logo=scikit-learn\&logoColor=white)
+![APIs](https://img.shields.io/badge/APIs-NASA%20POWER%20%7C%20Open-Meteo-blue?style=for-the-badge)
+![Frontend](https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-orange?style=for-the-badge)
+![Database](https://img.shields.io/badge/Database-SQLite-lightgrey?style=for-the-badge)
+
+---
+
+## 🔄 Workflow
+
+```mermaid
+flowchart TD
+    A[Enter village coordinates] --> B[Fetch satellite & weather data]
+    B --> C[Calculate solar & wind energy]
+    C --> D[AI predicts 7-day energy output]
+    D --> E[Compute village electricity demand & storage]
+    E --> F[Generate energy usage plan for houses, EVs, cooking]
+    F --> G[View interactive dashboard]
+```
+
+---
+
+## 🔬 Energy Calculations
 
 **Solar Energy:**
 
-```python
+```text
 Energy (kWh/day) = Solar Radiation × Panel Area × Efficiency
 ```
 
 **Wind Energy:**
 
-```python
+```text
 Power (kW) = 0.5 × Air Density × Rotor Area × Wind³
 ```
 
@@ -48,40 +73,60 @@ Power (kW) = 0.5 × Air Density × Rotor Area × Wind³
 ## 🎨 Dashboard Highlights
 
 * **Map:** Interactive district solar potential (🟢 High, 🟡 Medium, 🔴 Low)
-* **Panel:** Shows predicted solar energy, wind speed, and renewable score
+* **Panel:** Predicted solar energy, wind speed, renewable score
 * **Chart:** 7-day solar energy forecast using Chart.js
 * **Globe:** 3D India renewable energy visualization with Three.js
 
 ---
 
-## 🏗️ Tech Stack
+## 🖼️ Output Screenshots
 
-* **Backend:** Django (Python)
-* **AI/ML:** scikit-learn Linear Regression
-* **APIs:** NASA POWER, Open-Meteo, OpenStreetMap
-* **Frontend:** HTML, CSS, JS, Leaflet, Chart.js, Three.js
-* **Database:** SQLite
- Why This Project Matters
-* Promotes **renewable energy adoption** at village & household level
-* Reduces **pollution & fossil fuel usage**
-* Supports **EV charging & clean cooking**
-* Enables **smart energy storage and planning**
- Getting Started
-# Clone the repository
-git clone <your-repo-link>
-# Install dependencies
-pip install django pandas scikit-learn requests
-# Run the server
-python manage.py runserver
-Open browser: `http://127.0.0.1:8000`
-Enter latitude & longitude** → see renewable energy plan!
-Inspiration
-.This project is inspired by ISRO, NASA, and NREL research in renewable energy planning and smart grids.
-.Smart renewable energy for villages is the key to a sustainable and pollution-free future.
+**Main Dashboard:**
+![Main Dashboard](images/main/main.png)
 
+**Energy Results:**
+![Result Dashboard](images/result/result.png)
 
 ---
 
-Harini, if you want, I can also **design a ready-to-paste GitHub README with images, icons, colored sections, and a live demo GIF** so it looks like a **professional government research dashboard** — this will **definitely impress internship evaluators**.
+## 🚀 Getting Started
 
-Do you want me to make that full visual GitHub-ready version next?
+```bash
+# Clone repository
+git clone <repo-url>
+
+# Install dependencies
+pip install django pandas scikit-learn requests
+
+# Run server
+python manage.py runserver
+```
+
+Open browser: [http://127.0.0.1:8000](http://127.0.0.1:8000) → Enter latitude & longitude → see renewable energy plan!
+
+---
+
+## 🌱 Impact
+
+* Promotes renewable energy adoption at village & household level
+* Reduces pollution & fossil fuel usage
+* Supports EV charging & clean cooking
+* Enables smart energy storage and planning
+
+---
+
+## 💡 Inspiration
+
+Inspired by **ISRO**, **NASA**, and **NREL** research in renewable energy planning and smart grids.
+Smart renewable energy for villages is key to a **sustainable, pollution-free future**.
+
+---
+
+## 🎯 Next Steps / Ideas
+
+* Add **real-time weather updates** for dynamic planning
+* Include **battery optimization** for peak hours
+* Expand dashboard to show **district-wise comparison**
+* Generate **PDF reports** for village energy plans
+
+---
